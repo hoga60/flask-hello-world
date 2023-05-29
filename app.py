@@ -20,6 +20,18 @@ import readPhonetic as rp
 import readImage as ri
 from argparse import ArgumentParser
 
+@handler.add(MessageEvent, message = TextMessage)
+def handler_message(event):
+    mtext = event.message.text
+    if mtext == "@傳送文字":
+        try:
+            message = TextSendMessage(
+                text = "我是xia_bot，\n您好!"
+            )
+            line_bot_api.reply_message(event.reply_token, message)
+        except:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text = '發生錯誤'))
+
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookParser
@@ -28,7 +40,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage 
 )
 
 app = Flask(__name__)
@@ -85,7 +97,7 @@ def callback():
                     preview_image_url = image
                 )
             ]
-        line_bot_api_reply_message( token, message )
+        line_bot_api.reply_message( token, message )
         
         """
         line_bot_api.reply_message(
