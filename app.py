@@ -71,7 +71,7 @@ def callback():
         message = phone + ' <br/> ' + image 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=image)
+            TextSendMessage(text=message)
             #TextSendMessage(text=event.message.text)
         )
 
