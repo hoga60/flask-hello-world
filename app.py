@@ -66,14 +66,21 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        phone = rp.read( event.message.text )
+        reply_token = event.reply_token
+        
+        # phone = rp.read( event.message.text )
         image = ri.read( event.message.text )
-        message = phone + ' <br/> ' + image 
+        # message = phone + ' <br/> ' + image 
+        
+        reply_image(image, reply_token, channel_access_token)
+        
+        """
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=message)
             #TextSendMessage(text=event.message.text)
         )
+        """
 
     return 'OK'
 
@@ -87,3 +94,17 @@ if __name__ == "__main__":
     options = arg_parser.parse_args()
 
     app.run(debug=options.debug, port=options.port)
+    
+    
+def reply_image(msg, rk, token):
+    headers = {'Authorization':f'Bearer {token}','Content-Type':'application/json'}    
+    body = {
+    'replyToken':rk,
+    'messages':[{
+          'type': 'image',
+          'originalContentUrl': msg,
+          'previewImageUrl': msg
+        }]
+    }
+    req = requests.request('POST', 'https://api.line.me/v2/bot/message/reply', headers=headers,data=json.dumps(body).encode('utf-8'))
+    print(req.text)
