@@ -87,7 +87,7 @@ def callback():
                 )
             ]
         
-        line_bot_api.reply_message( reply_token,  )
+        line_bot_api.reply_message( reply_token, message )
         
         """
         line_bot_api.reply_message(
