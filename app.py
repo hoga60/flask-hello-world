@@ -16,6 +16,7 @@
 import os
 import sys
 import readPhonetic as rp
+import readImage as ri
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -66,9 +67,15 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         phone = rp.read( event.message.text )
+        image = ri.read( event.message.text )
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=phone)
+            #TextSendMessage(text=event.message.text)
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=image)
             #TextSendMessage(text=event.message.text)
         )
 
