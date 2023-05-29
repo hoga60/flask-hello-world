@@ -88,6 +88,7 @@ def callback():
         reply_arr.append( image )
         
         # reply_image(image, reply_token, channel_access_token)
+        """
         message = [
                 TextSendMessage(
                     text = phone
@@ -97,7 +98,8 @@ def callback():
                     preview_image_url = image
                 )
             ]
-        line_bot_api.reply_message( reply_token, message )
+        """
+        line_bot_api.reply_message( reply_token,  )
         
         """
         line_bot_api.reply_message(
