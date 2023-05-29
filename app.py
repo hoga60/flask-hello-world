@@ -68,11 +68,7 @@ def callback():
             continue
         phone = rp.read( event.message.text )
         image = ri.read( event.message.text )
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=phone)
-            #TextSendMessage(text=event.message.text)
-        )
+        message = phone + ' <br/> ' + image 
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=image)
