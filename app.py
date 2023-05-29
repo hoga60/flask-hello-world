@@ -11,8 +11,8 @@ def linebot():
     json_data = json.loads(body)
     print(json_data)
     try:
-        line_bot_api = LineBotApi('你的 Channel access token')
-        handler = WebhookHandler('你的 LINE Channel secret')
+        line_bot_api = LineBotApi('9Uu7fzrtqXome+fyLufdqkxI/zdU8+lQQsUSF0cMHrNar6+D2Iq+6Fr5A0hJaTIcxQLoU0OXiKnNrcOWeIUOhfDxLYaqZ3AOZ7RM9i9nMvCGXRwPNgorKSteluLUSEGAATdzA81SYyWqGUfIaqI14wdB04t89/1O/w1cDnyilFU=')
+        handler = WebhookHandler('22b3dd5edc00635eec518f2efc897e66')
         signature = request.headers['X-Line-Signature']
         handler.handle(body, signature)
         tk = json_data['events'][0]['replyToken']         # 取得 reply token
