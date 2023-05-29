@@ -65,10 +65,9 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-
+        phone = rp.read( event.message.text )
         line_bot_api.reply_message(
             event.reply_token,
-            phone = rp.read( event.message.text )
             TextSendMessage(text=phone)
             #TextSendMessage(text=event.message.text)
         )
