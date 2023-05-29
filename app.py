@@ -11,8 +11,20 @@ def linebot():
     json_data = json.loads(body)
     print(json_data)
     try:
-        line_bot_api = LineBotApi('')
-        handler = WebhookHandler('')
+        channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
+        channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+
+        if channel_secret is None:
+            print('Specify LINE_CHANNEL_SECRET as environment variable.')
+            sys.exit(1)
+
+        if channel_access_token is None:
+            print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+            sys.exit(1)
+        
+        line_bot_api = LineBotApi(channel_access_token)
+        handler = WebhookHandler(channel_secret)
+        
         signature = request.headers['X-Line-Signature']
         handler.handle(body, signature)
         tk = json_data['events'][0]['replyToken']         # 取得 reply token
