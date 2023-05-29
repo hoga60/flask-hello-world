@@ -15,6 +15,7 @@
 
 import os
 import sys
+import readPhonetic as rp
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -67,7 +68,9 @@ def callback():
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text)
+            phone = rp.read( event.message.text )
+            TextSendMessage(text=phone)
+            #TextSendMessage(text=event.message.text)
         )
 
     return 'OK'
