@@ -69,31 +69,23 @@ def callback():
             continue
         reply_token = event.reply_token
         
-        reply_arr=[]
+        message = []
         phone = rp.read( event.message.text )
         image = ri.read( event.message.text )
-        reply_arr.append( phone )
-        reply_arr.append( image )
         
-        # reply_image(image, reply_token, channel_access_token)
-        
-        message = [
-                TextSendMessage(
-                    text = phone
-                ),
-                ImageSendMessage(
+        message.append( TextSendMessage( text = phone ) 
+        message.append( ImageSendMessage(
                     original_content_url = image,
                     preview_image_url = image
-                )
-            ]
+        )
         
         line_bot_api.reply_message( reply_token, message )
         
         """
+        # 
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=message)
-            #TextSendMessage(text=event.message.text)
+            reply_token,
+            TextSendMessage(text=event.message.text)
         )
         """
         
@@ -110,17 +102,3 @@ if __name__ == "__main__":
     options = arg_parser.parse_args()
 
     app.run(debug=options.debug, port=options.port)
-    
-    
-def reply_image(msg, rk, token):
-    headers = {'Authorization':f'Bearer {token}','Content-Type':'application/json'}    
-    body = {
-    'replyToken':rk,
-    'messages':[{
-          'type': 'image',
-          'originalContentUrl': msg,
-          'previewImageUrl': msg
-        }]
-    }
-    req = requests.request('POST', 'https://api.line.me/v2/bot/message/reply', headers=headers,data=json.dumps(body).encode('utf-8'))
-    print(req.text)
