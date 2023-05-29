@@ -1,3 +1,6 @@
 Flask
 gunicorn
 line-bot-sdk
+requests
+BeautifulSoup4
+lxml
