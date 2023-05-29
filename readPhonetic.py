@@ -11,8 +11,6 @@ def read( word ):
         row = data.find_all('tr')[2]
         chinese = row.find('cr').text
         phones = row.find('td', class_='ph').text
-        s = " ".join( phone )
-        # s = row.find('sub')
         return ( chinese + phones )
     except:
         return ( '查無此字' )
