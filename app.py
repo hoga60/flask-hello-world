@@ -81,13 +81,25 @@ def callback():
         line_bot_api.reply_message( reply_token, message )
         
         """
-        # 
+        # 一個 reply_token 只能傳送一次訊息, 傳完就作廢
+        # 要傳多個訊息, 請改用 List
+        
+        # 傳送文字訊息
         line_bot_api.reply_message(
             reply_token,
             TextSendMessage(text=event.message.text)
         )
         """
         
+        """
+        # 傳送圖片訊息
+        line_bot_api.reply_message(
+            reply_token,
+            ImageSendMessage(
+                    original_content_url = image,
+                    preview_image_url = image)
+        )
+        """
 
     return 'OK'
 
