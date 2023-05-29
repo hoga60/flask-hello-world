@@ -15,6 +15,7 @@
 
 import os
 import sys
+import requests
 import readPhonetic as rp
 import readImage as ri
 from argparse import ArgumentParser
