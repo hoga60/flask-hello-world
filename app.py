@@ -97,7 +97,7 @@ def callback():
                     preview_image_url = image
                 )
             ]
-        line_bot_api.reply_message( token, message )
+        line_bot_api.reply_message( reply_token, message )
         
         """
         line_bot_api.reply_message(
